@@ -5,10 +5,10 @@ class Success extends React.Component {
         const { email } = this.props
         
         return (
-        <div  >
-            <h1>Form Submitted</h1>
-            <h4 >{email}
-            </h4>
+        <div className="bg-light text-dark p-5">
+            <h2 className="text-center mb-5">Form Submitted</h2>
+            <h5 className="text-info">{email}
+            </h5>
         </div>
         );
     }

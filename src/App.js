@@ -2,7 +2,7 @@ import React from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-import Button from "react-bootstrap/Button"
+import Button from "./components/Button"
 import Input from "./components/Input"
 import Success from "./components/Sucess";
 
@@ -80,31 +80,24 @@ class App extends React.Component {
 
 
   render() {
-    
     return (
     <div className="container">
-        <h1>Login</h1>
+        <h1 className="text-center p-3">Login</h1>
         {this.state.isSubmitted ? <Success email={this.state.email} /> :
 
           <form onSubmit={this.handleSubmit}>
+            
+            <Input label="Firstname" type="text" placeholder="Enter firstname" className="form-control mb-3" onChange={this.handleFirstNameChange} />
 
-            <label>firstName</label>
-            <Input type="text" placeholder="Enter firstName" className="form-control" onChange={this.handleFirstNameChange} />
+            <Input label="Lastname" type="text" placeholder="Enter lastname" className="form-control mb-3" onChange={this.handleLastNameChange} />
 
-            <label>lastName</label>
-            <Input type="text" placeholder="Enter lastName" className="form-control" onChange={this.handleLastNameChange} />
+            <Input label="Email address" type="email" placeholder="Enter email" className="form-control mb-3" onChange={this.handleEmailChange} />
 
-            <label>Email address</label>
-            <Input type="email" placeholder="Enter email" className="form-control" onChange={this.handleEmailChange} />
+            <Input label="Password" type="password" placeholder="Password" className="form-control mb-3" onChange={this.handlePasswordChange} />
 
-            <label>Password</label>
-            <Input type="password" placeholder="Password" className="form-control" onChange={this.handlePasswordChange} />
+            <Input type="checkbox" className="mb-3" onChange={this.handleRememberMeChange} />
 
-            <Input type="checkbox" label="remember me" onChange={this.handleRememberMeChange} />
-
-            <Button variant="primary" type="submit" >
-              Submit
-            </Button>
+            <Button  type="submit" label="Submit" />
           </form>
         }
       </div>
