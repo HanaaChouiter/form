@@ -1,7 +1,7 @@
 import React from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Form from "react-bootstrap/Form"
+
 import Button from "react-bootstrap/Button"
 import Input from "./components/Input"
 import Success from "./components/Sucess";
@@ -63,11 +63,11 @@ class App extends React.Component {
     this.state.rememberMe ? this.setState({ rememberMe: false }) : this.setState({ rememberMe: true })
   }
 
-  handleFirstNameChange(e){
+  handleFirstNameChange(e) {
     this.setState({ firstName: e.target.value })
   }
 
-  handleLastNameChange(e){
+  handleLastNameChange(e) {
     this.setState({ lastName: e.target.value })
   }
 
@@ -77,35 +77,38 @@ class App extends React.Component {
       this.setState({ isSubmitted: true })
     }
   }
-  
+
 
   render() {
+    
     return (
-      <div className="container">
-        <form onSubmit={this.handleSubmit}>
-          {this.state.isSubmitted ? <Success  /> : null}
+    <div className="container">
+        <h1>Login</h1>
+        {this.state.isSubmitted ? <Success email={this.state.email} /> :
 
-          <label>firstName</label>
-          <Input type="text" placeholder="Enter firstName" className="form-control" onChange={this.handleFirstNameChange} />
+          <form onSubmit={this.handleSubmit}>
 
-          <label>lastName</label>
-          <Input type="text" placeholder="Enter lastName" className="form-control" onChange={this.handleLastNameChange} />
+            <label>firstName</label>
+            <Input type="text" placeholder="Enter firstName" className="form-control" onChange={this.handleFirstNameChange} />
 
-          <label>Email address</label>
-          <Input type="email" placeholder="Enter email" className="form-control" onChange={this.handleEmailChange} />
+            <label>lastName</label>
+            <Input type="text" placeholder="Enter lastName" className="form-control" onChange={this.handleLastNameChange} />
 
-          <label>Password</label>
-          <Input type="password" placeholder="Password" className="form-control" onChange={this.handlePasswordChange} />
+            <label>Email address</label>
+            <Input type="email" placeholder="Enter email" className="form-control" onChange={this.handleEmailChange} />
 
-          <Input type="checkbox" label="remember me" onChange={this.handleRememberMeChange} />
+            <label>Password</label>
+            <Input type="password" placeholder="Password" className="form-control" onChange={this.handlePasswordChange} />
 
-          <Button variant="primary" type="submit" >
-            Submit
-          </Button>
-        </form>
+            <Input type="checkbox" label="remember me" onChange={this.handleRememberMeChange} />
+
+            <Button variant="primary" type="submit" >
+              Submit
+            </Button>
+          </form>
+        }
       </div>
     )
-
   }
 }
 

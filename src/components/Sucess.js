@@ -7,7 +7,7 @@ class Success extends React.Component {
         return (
         <div  >
             <h1>Form Submitted</h1>
-            <h4>
+            <h4 >{email}
             </h4>
         </div>
         );
