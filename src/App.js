@@ -4,98 +4,109 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import Input from "./components/Input"
+import Success from "./components/Sucess";
 
 
 class App extends React.Component {
-  constructor(){
+  constructor() {
     super()
-    
+
     this.state = {
-    email: "",
-    password: "",
-    rememberMe: false,
-    emailIsValid: false,
-    passwordIsValid: false,
-    isSubmitted: false
+      email: "",
+      password: "",
+      rememberMe: false,
+      emailIsValid: false,
+      passwordIsValid: false,
+      isSubmitted: false,
+      firstName: "",
+      lastName: ""
     }
 
-    this.handleEmailChange=this.handleEmailChange.bind(this)
-    this.handlePasswordChange=this.handlePasswordChange.bind(this)
-    this.handleRememberMeChange=this.handleRememberMeChange.bind(this)
-    this.handleSubmit=this.handleSubmit.bind(this)
+    this.handleEmailChange = this.handleEmailChange.bind(this)
+    this.handlePasswordChange = this.handlePasswordChange.bind(this)
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this)
+    this.handleLastNameChange = this.handleLastNameChange.bind(this)
+    this.handleRememberMeChange = this.handleRememberMeChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
 
-  handleEmailChange(e){
+  handleEmailChange(e) {
 
-    this.setState({email : e.target.value})
+    this.setState({ email: e.target.value })
 
     let regex = /[\w.]+@([\w-]+\.)+[\w-]{2,4}$/
 
-    if (regex.test(e.target.value)){
-      console.log('ooga booga');
-      e.target.className= 'form-control is-valid'
-      this.setState({emailIsValid: true})
-    }else {
-      e.target.className= 'form-control is-invalid'
-      this.setState({emailIsValid: false})
+    if (regex.test(e.target.value)) {
+      e.target.className = 'form-control is-valid'
+      this.setState({ emailIsValid: true })
+    } else {
+      e.target.className = 'form-control is-invalid'
+      this.setState({ emailIsValid: false })
     }
   }
 
-  handlePasswordChange(e){
+  handlePasswordChange(e) {
     console.log(this.state)
-    this.setState({password: e.target.value})
-    if ( e.target.value.length > 5){
-      this.setState({ passwordIsValid: true})
-    }else {
-      this.setState({ passwordIsValid: false})
+    this.setState({ password: e.target.value })
+    if (e.target.value.length > 5) {
+      e.target.className = 'form-control is-valid'
+      this.setState({ passwordIsValid: true })
+    } else {
+      e.target.className = 'form-control is-invalid'
+      this.setState({ passwordIsValid: false })
     }
   }
 
-  handleRememberMeChange(){
+  handleRememberMeChange() {
     // console.log(this.state)
-    this.state.rememberMe  ? this.setState({rememberMe: false}) : this.setState({rememberMe: true})
+    this.state.rememberMe ? this.setState({ rememberMe: false }) : this.setState({ rememberMe: true })
   }
 
-  handleSubmit(e){
+  handleFirstNameChange(e){
+    this.setState({ firstName: e.target.value })
+  }
+
+  handleLastNameChange(e){
+    this.setState({ lastName: e.target.value })
+  }
+
+  handleSubmit(e) {
     e.preventDefault()
-    if(this.state.emailIsValid && this.state.passwordIsValid){
-      this.setState({isSubmitted: true})
-    } 
-    // let email = e.target.value
-    // this.state.isSubmitted ? email :
+    if (this.state.emailIsValid && this.state.passwordIsValid) {
+      this.setState({ isSubmitted: true })
+    }
   }
-
-
-
- 
-
-render(){
-  return (
-    <div className="container">
-    <Form onSubmit={this.handleSubmit}>
-    <Form className="mb-3" controlId="formBasicEmail">
-      <Form.Label>Email address</Form.Label>
-      <Input type="email" placeholder="Enter email" className="form-control" onChange={this.handleEmailChange}/>
-    </Form>
   
-    <Form.Group className="mb-3" controlId="formBasicPassword">
-      <Form.Label>Password</Form.Label>
-      <Input type="password" placeholder="Password" onChange={this.handlePasswordChange}/>
-    </Form.Group>
 
-    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-      <Form.Check type="checkbox" label="remember me" onChange={this.handleRememberMeChange}/>
-    </Form.Group>
+  render() {
+    return (
+      <div className="container">
+        <form onSubmit={this.handleSubmit}>
+          {this.state.isSubmitted ? <Success  /> : null}
 
-    <Button variant="primary" type="submit" >
-      Submit
-    </Button>
-  </Form>
-  </div>
+          <label>firstName</label>
+          <Input type="text" placeholder="Enter firstName" className="form-control" onChange={this.handleFirstNameChange} />
+
+          <label>lastName</label>
+          <Input type="text" placeholder="Enter lastName" className="form-control" onChange={this.handleLastNameChange} />
+
+          <label>Email address</label>
+          <Input type="email" placeholder="Enter email" className="form-control" onChange={this.handleEmailChange} />
+
+          <label>Password</label>
+          <Input type="password" placeholder="Password" className="form-control" onChange={this.handlePasswordChange} />
+
+          <Input type="checkbox" label="remember me" onChange={this.handleRememberMeChange} />
+
+          <Button variant="primary" type="submit" >
+            Submit
+          </Button>
+        </form>
+      </div>
     )
-  
-}
+
+  }
 }
 
 export default App
